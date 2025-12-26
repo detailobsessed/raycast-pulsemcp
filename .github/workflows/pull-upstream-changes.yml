@@ -1,0 +1,17 @@
+name: Pull upstream changes from raycast/extensions
+on:
+  schedule:
+    # Run daily at 5am UTC
+    - cron: "0 5 * * *"
+  workflow_dispatch:
+
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: timrogers/pull-raycast-extension-changes@v1.0.0
+        with:
+          extension_name: pulsemcp
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}

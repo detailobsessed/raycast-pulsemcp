@@ -1,0 +1,26 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-merge-conflict
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+
+  - repo: local
+    hooks:
+      - id: biome-check
+        name: Biome Check
+        entry: bun run lint
+        language: system
+        pass_filenames: false
+        always_run: true
+
+      - id: api-test
+        name: PulseMCP API Tests
+        entry: bun run src/api.test.ts
+        language: system
+        pass_filenames: false
+        always_run: true
+
+# Run `bun run build` manually before committing
+# The ray CLI has PTY issues with pre-commit hooks
